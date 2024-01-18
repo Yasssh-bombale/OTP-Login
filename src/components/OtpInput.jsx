@@ -15,13 +15,33 @@ const OtpInput = ({ length = 4, onOtpSubmithandler = () => {} }) => {
     // setter function for setOtp() is an asynchronous function hence we are using newOTP;
     const combinedOTP = newOTP.join("");
     if (combinedOTP.length === length) {
-      console.log(combinedOTP);
+      //submit trigger
       onOtpSubmithandler(combinedOTP);
+    }
+    // move to next input if current input is filled;
+    if (value && index < length - 1 && inputRefs.current[index + 1]) {
+      inputRefs.current[index + 1].focus();
     }
   };
 
-  const handlerClick = (index) => {};
-  const handleKeyDown = (index, e) => {};
+  const handleKeyDown = (index, e) => {
+    // move focus to previous input when "backspace" is entered
+    if (
+      e.key === "Backspace" &&
+      !otp[index] &&
+      index > 0 &&
+      inputRefs.current[index - 1]
+    ) {
+      inputRefs.current[index - 1].focus();
+    }
+  };
+  const handleClick = (index) => {
+    inputRefs.current[index].setSelectionRange(1, 1);
+    //optional
+    if (index > 0 && inputRefs.current[index - 1]) {
+      inputRefs.current[otp.indexOf("")].focus();
+    }
+  };
 
   useEffect(() => {
     if (inputRefs.current[0]) {
@@ -38,7 +58,7 @@ const OtpInput = ({ length = 4, onOtpSubmithandler = () => {} }) => {
           type="text"
           value={value}
           onChange={(e) => handleChange(index, e)}
-          onClick={() => handlerClick(index)}
+          onClick={() => handleClick(index)}
           onKeyDown={(e) => handleKeyDown(index, e)}
           className="w-14 h-14 mx-2 text-black text-3xl font-semibold text-center"
         />

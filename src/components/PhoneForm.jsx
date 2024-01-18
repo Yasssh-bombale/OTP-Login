@@ -26,12 +26,12 @@ const PhoneForm = () => {
   };
 
   return (
-    <div className="border max-w-lg p-5">
+    <div className=" max-wxl p-5">
       {!showOtpField ? (
         <form onSubmit={submitHandler}>
           <div className="w-full flex gap-2">
             <input
-              className="w-full h-[2rem] text-black p-2 outline-none border-none "
+              className="w-[15rem] h-[3rem] text-black p-2 outline-none border-none "
               type="number"
               required
               placeholder="enter phone number"
