@@ -21,7 +21,9 @@ const PhoneForm = () => {
     setShowOtpField(true);
   };
 
-  const onOtpSubmithandler = () => {};
+  const onOtpSubmithandler = (otp) => {
+    console.log("login successfull with otp", otp);
+  };
 
   return (
     <div className="border max-w-lg p-5">
